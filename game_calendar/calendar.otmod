@@ -1,0 +1,8 @@
+Module
+  name: game_calendar
+  description: Displays calendar
+  author: pw1602 (Tugaon)
+  sandboxed: true
+  scripts: [ calendar ]
+  @onLoad: init()
+  @onUnload: terminate()

@@ -1,0 +1,204 @@
+CalendarEvent < Panel
+  image-source: /images/ui/panel_flat
+  image-border: 1
+  border: 1 alpha
+  height: 15
+  anchors.top: prev.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin-top: 15
+  margin-left: 1
+  margin-right: 1
+
+  Label
+    id: calendarEventName
+    anchors.fill: parent
+    text-align: center
+
+CalendarDay < Panel
+  image-source: /images/ui/panel_flat
+  image-border: 1
+  border: 1 alpha
+
+  Panel
+    id: calendarDayNameContainer
+    image-source: /images/ui/panel_flat
+    image-color: #646464
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin: 1
+    height: 15
+
+  Label
+    id: calendarDayName
+    anchors.fill: calendarDayNameContainer
+    text-align: center
+
+MainWindow
+  size: 878 686
+  id: calendarWindow
+  !text: tr('Calendar')
+  @onEnter: toggleWindow()
+  @onEscape: toggleWindow()
+
+  Panel
+    id: dayOfWeek
+    image-source: /images/ui/panel_flat
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 15
+    layout:
+      type: grid
+      cell-size: 118 15
+      cell-spacing: 1
+      flow: true
+
+    Panel
+      id: mondayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: monday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Monday
+
+    Panel
+      id: tuesdayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: tuesday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Tuesday
+
+    Panel
+      id: wednesdayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: wednesday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Wednesday
+
+    Panel
+      id: thursdayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: thursday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Thursday
+
+    Panel
+      id: fridayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: friday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Friday
+
+    Panel
+      id: saturdayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: saturday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Saturday
+
+    Panel
+      id: sundayContainer
+      image-source: /images/ui/panel_flat
+      image-color: #41A1FF
+
+      Label
+        id: sunday
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: Sunday
+
+  ScrollablePanel
+    id: selectionList
+    anchors.top: prev.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: toggleButton.top
+    image-source: /images/ui/panel_flat
+    image-border: 1
+    margin-bottom: 5
+    vertical-scrollbar: selectionScroll
+    layout:
+      type: grid
+      cell-size: 118 120
+      cell-spacing: 1
+      flow: true
+
+  VerticalScrollBar
+    id: selectionScroll
+    anchors.top: dayOfWeek.top
+    anchors.right: prev.right
+    anchors.bottom: prev.bottom
+    step: 80
+    pixel-scroll: true
+
+  Button
+    id: toggleButton
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    text: Close
+    width: 65
+    @onClick: modules.game_calendar.toggleWindow()
+
+  Button
+    id: nextMonth
+    anchors.bottom: parent.bottom
+    anchors.right: prev.left
+    margin-right: 5
+    width: 30
+    @onClick: modules.game_calendar.buildMonth(1)
+
+    Label
+      id: nextMonthLabel
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      image-source: /images/ui/arrow_horizontal
+      image-clip: 12 42 12 21
+      size: 12 21
+      text-align: center
+
+  Button
+    id: currentMonth
+    anchors.bottom: parent.bottom
+    anchors.right: prev.left
+    margin-right: 5
+    text: Current Month
+    image-color: #41A1FF
+    @onClick: modules.game_calendar.buildMonth(0)
+
+  Button
+    id: previousMonth
+    anchors.bottom: parent.bottom
+    anchors.right: prev.left
+    margin-right: 5
+    width: 30
+    @onClick: modules.game_calendar.buildMonth(-1)
+
+    Label
+      id: previousMonthLabel
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      anchors.left: parent.left
+      image-source: /images/ui/arrow_horizontal
+      image-clip: 0 0 12 21
+      size: 12 21
+      text-align: center
+
