@@ -81,7 +81,7 @@ local function convertToTimestamp(date)
     local pattern = "(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)"
     local runyear, runmonth, runday, runhour, runminute, runseconds = date:match(pattern)
 
-    if (tonumber(runyear) < currentDate.year) then
+    if (tonumber(runyear) < 2) then
         runyear = currentDate.year + tonumber(runyear)
     end
 
